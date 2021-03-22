@@ -142,7 +142,7 @@ async function createUpdates(
       continue;
     }
 
-    const filteredCurrent = curUpdateDatas.filter((curUpdateData) =>
+    const filteredCurrent = curUpdateDatas.filter(curUpdateData =>
       filterOnDeleteCondition(curUpdateData, deleteCondition),
     );
     if (filteredCurrent.length === 0) {
@@ -150,7 +150,7 @@ async function createUpdates(
       continue;
     }
 
-    const isNewUpdateDataFiltered = !filteredCurrent.every((curUpdateData) => {
+    const isNewUpdateDataFiltered = !filteredCurrent.every(curUpdateData => {
       const curDeleteCondition = getDeleteCondition(curUpdateData);
       invariant(
         curDeleteCondition,
@@ -572,7 +572,7 @@ async function updateInfosFromRawUpdateInfos(
     } else if (rawUpdateInfo.type === updateTypes.UPDATE_ENTRY) {
       invariant(entryInfosResult, 'should be set');
       const entryInfo = entryInfosResult.find(
-        (candidate) => candidate.id === rawUpdateInfo.entryID,
+        candidate => candidate.id === rawUpdateInfo.entryID,
       );
       if (!entryInfo) {
         console.warn(
@@ -590,7 +590,7 @@ async function updateInfosFromRawUpdateInfos(
     } else if (rawUpdateInfo.type === updateTypes.UPDATE_CURRENT_USER) {
       invariant(currentUserInfosResult, 'should be set');
       const currentUserInfo = currentUserInfosResult.find(
-        (candidate) => candidate.id === viewer.userID,
+        candidate => candidate.id === viewer.userID,
       );
       if (!currentUserInfo) {
         console.warn(

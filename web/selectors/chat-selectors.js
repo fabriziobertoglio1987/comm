@@ -96,7 +96,7 @@ const webChatListData: (state: AppState) => ChatThreadItem[] = createSelector(
       }
 
       let indexToInsert = item.sidebars.findIndex(
-        (sidebar) =>
+        sidebar =>
           sidebar.lastUpdatedTime === undefined ||
           sidebar.lastUpdatedTime < activeItem.lastUpdatedTime,
       );

@@ -258,7 +258,7 @@ const LogInPanelContainer = React.forwardRef<
   props: BaseProps,
   ref: React.Ref<typeof BaseLogInPanelContainer>,
 ) {
-  const windowWidth = useSelector((state) => state.dimensions.width);
+  const windowWidth = useSelector(state => state.dimensions.width);
   return (
     <BaseLogInPanelContainer {...props} windowWidth={windowWidth} ref={ref} />
   );

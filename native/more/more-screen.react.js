@@ -530,7 +530,7 @@ const resendVerificationLoadingStatusSelector = createLoadingStatusSelector(
 export default React.memo<BaseProps>(function ConnectedMoreScreen(
   props: BaseProps,
 ) {
-  const currentUserInfo = useSelector((state) => state.currentUserInfo);
+  const currentUserInfo = useSelector(state => state.currentUserInfo);
   const preRequestUserState = useSelector(preRequestUserStateSelector);
   const resendVerificationLoading =
     useSelector(resendVerificationLoadingStatusSelector) === 'loading';

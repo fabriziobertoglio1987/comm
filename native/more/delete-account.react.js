@@ -237,14 +237,14 @@ const loadingStatusSelector = createLoadingStatusSelector(
 
 export default React.memo<{ ... }>(function ConnectedDeleteAccount() {
   const loadingStatus = useSelector(loadingStatusSelector);
-  const username = useSelector((state) => {
+  const username = useSelector(state => {
     if (state.currentUserInfo && !state.currentUserInfo.anonymous) {
       return state.currentUserInfo.username;
     }
     return undefined;
   });
   const preRequestUserState = useSelector(preRequestUserStateSelector);
-  const activeTheme = useSelector((state) => state.globalThemeInfo.activeTheme);
+  const activeTheme = useSelector(state => state.globalThemeInfo.activeTheme);
   const colors = useColors();
   const styles = useStyles(unboundStyles);
 

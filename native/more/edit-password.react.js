@@ -195,7 +195,7 @@ class EditPassword extends React.PureComponent<Props, State> {
   };
 
   goBackOnce() {
-    this.props.navigation.dispatch((state) => ({
+    this.props.navigation.dispatch(state => ({
       ...CommonActions.goBack(),
       target: state.key,
     }));
@@ -346,13 +346,13 @@ export default React.memo<BaseProps>(function ConnectedEditPassword(
   props: BaseProps,
 ) {
   const loadingStatus = useSelector(loadingStatusSelector);
-  const username = useSelector((state) => {
+  const username = useSelector(state => {
     if (state.currentUserInfo && !state.currentUserInfo.anonymous) {
       return state.currentUserInfo.username;
     }
     return undefined;
   });
-  const activeTheme = useSelector((state) => state.globalThemeInfo.activeTheme);
+  const activeTheme = useSelector(state => state.globalThemeInfo.activeTheme);
   const colors = useColors();
   const styles = useStyles(unboundStyles);
 

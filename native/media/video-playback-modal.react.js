@@ -248,7 +248,7 @@ function VideoPlaybackModal(props: Props) {
     videoRef.current.seek(0);
   }, []);
 
-  const progressCallback = React.useCallback((res) => {
+  const progressCallback = React.useCallback(res => {
     setTimeElapsed(formatDuration(res.currentTime));
     setTotalDuration(formatDuration(res.seekableDuration));
     setPercentElapsed(

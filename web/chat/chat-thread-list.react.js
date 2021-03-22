@@ -22,18 +22,18 @@ function ChatThreadList(props: Props) {
     forceIncludeActiveThread,
   } = props;
   const activeChatThreadID = useSelector(
-    (state) => state.navInfo.activeChatThreadID,
+    state => state.navInfo.activeChatThreadID,
   );
   const chatListData = useSelector(webChatListData);
   const listData: React.Node[] = React.useMemo(() => {
     const threads = chatListData
       .filter(
-        (item) =>
+        item =>
           filterThreads(item.threadInfo) ||
           (item.threadInfo.id === activeChatThreadID &&
             forceIncludeActiveThread),
       )
-      .map((item) => (
+      .map(item => (
         <ChatThreadListItem
           item={item}
           key={item.threadInfo.id}

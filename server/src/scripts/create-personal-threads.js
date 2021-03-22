@@ -63,7 +63,7 @@ async function markThreadsAsPersonal() {
     )
   `;
   const [result] = await dbQuery(findThreadsToUpdate);
-  const threadIDs = result.map((row) => row.id);
+  const threadIDs = result.map(row => row.id);
 
   if (threadIDs.length === 0) {
     return;

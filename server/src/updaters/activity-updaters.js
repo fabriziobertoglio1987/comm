@@ -72,7 +72,7 @@ async function activityUpdater(
   }
 
   const unverifiedThreadIDs: $ReadOnlySet<string> = new Set(
-    request.updates.map((update) => update.threadID),
+    request.updates.map(update => update.threadID),
   );
   const verifiedThreadIDs = await checkThreads(
     viewer,
@@ -96,15 +96,15 @@ async function activityUpdater(
   for (const threadID of verifiedThreadIDs) {
     const focusUpdates = focusUpdatesByThreadID.get(threadID);
     invariant(focusUpdates, `no focusUpdate for thread ID ${threadID}`);
-    const focusActive = !focusUpdates.some((update) => !update.focus);
+    const focusActive = !focusUpdates.some(update => !update.focus);
 
     const newLastReadMessage = _max(
       focusUpdates
         .filter(
-          (update) =>
+          update =>
             update.latestMessage && !update.latestMessage.startsWith('local'),
         )
-        .map((update) => parseInt(update.latestMessage)),
+        .map(update => parseInt(update.latestMessage)),
     );
 
     partialThreadStatuses.push({
@@ -245,12 +245,12 @@ async function updateFocusedRows(
   partialThreadStatuses: $ReadOnlyArray<PartialThreadStatus>,
 ): Promise<void> {
   const threadIDs = partialThreadStatuses
-    .filter((threadStatus) => threadStatus.focusActive)
+    .filter(threadStatus => threadStatus.focusActive)
     .map(({ threadID }) => threadID);
   const time = Date.now();
 
   if (threadIDs.length > 0) {
-    const focusedInsertRows = threadIDs.map((threadID) => [
+    const focusedInsertRows = threadIDs.map(threadID => [
       viewer.userID,
       viewer.session,
       threadID,

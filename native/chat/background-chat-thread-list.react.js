@@ -22,7 +22,7 @@ type BackgroundChatThreadListProps = {|
 export default function BackgroundChatThreadList(
   props: BackgroundChatThreadListProps,
 ) {
-  const unreadBackgroundThreadsNumber = useSelector((state) =>
+  const unreadBackgroundThreadsNumber = useSelector(state =>
     unreadBackgroundCount(state),
   );
 

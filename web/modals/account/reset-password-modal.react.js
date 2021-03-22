@@ -208,15 +208,15 @@ export default React.memo<BaseProps>(function ConnectedResetPasswordModal(
   props: BaseProps,
 ) {
   const resetPasswordUsername = useSelector(
-    (state) =>
+    state =>
       state.serverVerificationResult &&
       state.serverVerificationResult.success &&
       state.serverVerificationResult.field === verifyField.RESET_PASSWORD &&
       state.serverVerificationResult.username,
   );
-  const verifyCode = useSelector((state) => state.navInfo.verify);
+  const verifyCode = useSelector(state => state.navInfo.verify);
   const inputDisabled = useSelector(
-    (state) => loadingStatusSelector(state) === 'loading',
+    state => loadingStatusSelector(state) === 'loading',
   );
   const logInExtraInfo = useSelector(webLogInExtraInfoSelector);
   const callResetPassword = useServerCall(resetPassword);

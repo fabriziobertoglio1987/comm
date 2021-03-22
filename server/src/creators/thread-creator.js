@@ -153,9 +153,7 @@ async function createThread(
     if (!hasParentPermission) {
       throw new ServerError('invalid_credentials');
     }
-    parentThreadMembers = parentThreadInfo.members.map(
-      (userInfo) => userInfo.id,
-    );
+    parentThreadMembers = parentThreadInfo.members.map(userInfo => userInfo.id);
   }
 
   const relationshipChangeset = new RelationshipChangeset();
@@ -207,7 +205,7 @@ async function createThread(
   }
 
   const filteredInitialMemberIDs: ?$ReadOnlyArray<string> = initialMemberIDsFromRequest?.filter(
-    (id) => !silencedMemberIDs.has(id),
+    id => !silencedMemberIDs.has(id),
   );
   const initialMemberIDs =
     filteredInitialMemberIDs && filteredInitialMemberIDs.length > 0

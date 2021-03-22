@@ -157,7 +157,7 @@ class InnerPanel extends React.PureComponent<PanelProps, PanelState> {
 const Panel = React.memo<PanelBaseProps>(function ConnectedPanel(
   props: PanelBaseProps,
 ) {
-  const dimensions = useSelector((state) => state.dimensions);
+  const dimensions = useSelector(state => state.dimensions);
 
   return <InnerPanel {...props} dimensions={dimensions} />;
 });

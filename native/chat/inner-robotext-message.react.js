@@ -40,7 +40,7 @@ type InnerRobotextMessageProps = {|
 |};
 function InnerRobotextMessage(props: InnerRobotextMessageProps) {
   const { item, navigation, onLongPress, onPress } = props;
-  const activeTheme = useSelector((state) => state.globalThemeInfo.activeTheme);
+  const activeTheme = useSelector(state => state.globalThemeInfo.activeTheme);
   const styles = useOverlayStyles(unboundStyles);
   const { robotext } = item;
   const robotextParts = splitRobotext(robotext);
@@ -109,9 +109,7 @@ type ThreadEntityProps = {|
 |};
 function ThreadEntity(props: ThreadEntityProps) {
   const threadID = props.id;
-  const threadInfo = useSelector(
-    (state) => threadInfoSelector(state)[threadID],
-  );
+  const threadInfo = useSelector(state => threadInfoSelector(state)[threadID]);
 
   const styles = useOverlayStyles(unboundStyles);
 

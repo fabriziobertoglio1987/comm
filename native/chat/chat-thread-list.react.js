@@ -228,7 +228,7 @@ class ChatThreadList extends React.PureComponent<Props, State> {
       if (!searchText) {
         chatItems.push(
           ...reduxChatListData.filter(
-            (item) =>
+            item =>
               threadIsTopLevel(item.threadInfo) &&
               this.props.filterThreads(item.threadInfo),
           ),
@@ -253,7 +253,7 @@ class ChatThreadList extends React.PureComponent<Props, State> {
         const { viewerID } = this.props;
         if (viewerID) {
           chatItems.push(
-            ...usersSearchResults.map((user) =>
+            ...usersSearchResults.map(user =>
               createPendingThreadItem(viewerID, user),
             ),
           );
@@ -323,7 +323,7 @@ class ChatThreadList extends React.PureComponent<Props, State> {
 
     const { userInfos } = await this.props.searchUsers(usernamePrefix);
     return userInfos.filter(
-      (info) =>
+      info =>
         !this.props.usersWithPersonalThread.has(info.id) &&
         info.id !== this.props.viewerID,
     );
@@ -363,7 +363,7 @@ class ChatThreadList extends React.PureComponent<Props, State> {
   };
 
   onSwipeableWillOpen = (threadInfo: ThreadInfo) => {
-    this.setState((state) => ({ ...state, openedSwipeableId: threadInfo.id }));
+    this.setState(state => ({ ...state, openedSwipeableId: threadInfo.id }));
   };
 
   composeThread = () => {
@@ -405,7 +405,7 @@ export default React.memo<BaseProps>(function ConnectedChatThreadList(
 ) {
   const boundChatListData = useFlattenedChatListData();
   const viewerID = useSelector(
-    (state) => state.currentUserInfo && state.currentUserInfo.id,
+    state => state.currentUserInfo && state.currentUserInfo.id,
   );
   const threadSearchIndex = useSelector(threadSearchIndexSelector);
   const styles = useStyles(unboundStyles);

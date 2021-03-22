@@ -105,11 +105,11 @@ async function checkThreads(
   return new Set(
     result
       .filter(
-        (row) =>
+        row =>
           isThreadValid(row.permissions, row.role, checks) &&
           !disabledThreadIDs.has(row.thread.toString()),
       )
-      .map((row) => row.thread.toString()),
+      .map(row => row.thread.toString()),
   );
 }
 
@@ -120,7 +120,7 @@ async function checkThreadsFrozen(
 ) {
   const threadIDsWithDisabledPermissions = new Set();
 
-  const permissionMightBeDisabled = permissionsToCheck.some((permission) =>
+  const permissionMightBeDisabled = permissionsToCheck.some(permission =>
     permissionsDisabledByBlock.has(permission),
   );
   if (!permissionMightBeDisabled) {

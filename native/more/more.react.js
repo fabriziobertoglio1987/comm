@@ -35,7 +35,7 @@ import MoreScreen from './more-screen.react';
 import RelationshipList from './relationship-list.react';
 
 const header = (props: StackHeaderProps) => <MoreHeader {...props} />;
-const headerBackButton = (props) => <HeaderBackButton {...props} />;
+const headerBackButton = props => <HeaderBackButton {...props} />;
 const screenOptions = {
   header,
   headerLeft: headerBackButton,

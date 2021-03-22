@@ -51,7 +51,7 @@ async function initializeFCMApp() {
 }
 
 function endFirebase() {
-  fcmAdmin.apps?.forEach((app) => app?.delete());
+  fcmAdmin.apps?.forEach(app => app?.delete());
 }
 
 async function endAPNs() {

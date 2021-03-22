@@ -157,7 +157,7 @@ class EditEmail extends React.PureComponent<Props, State> {
   };
 
   goBackOnce() {
-    this.props.navigation.dispatch((state) => ({
+    this.props.navigation.dispatch(state => ({
       ...CommonActions.goBack(),
       target: state.key,
     }));
@@ -294,13 +294,13 @@ const loadingStatusSelector = createLoadingStatusSelector(
 export default React.memo<BaseProps>(function ConnectedEditEmail(
   props: BaseProps,
 ) {
-  const email = useSelector((state) =>
+  const email = useSelector(state =>
     state.currentUserInfo && !state.currentUserInfo.anonymous
       ? state.currentUserInfo.email
       : undefined,
   );
   const loadingStatus = useSelector(loadingStatusSelector);
-  const activeTheme = useSelector((state) => state.globalThemeInfo.activeTheme);
+  const activeTheme = useSelector(state => state.globalThemeInfo.activeTheme);
   const colors = useColors();
   const styles = useStyles(unboundStyles);
   const callChangeUserSettings = useServerCall(changeUserSettings);

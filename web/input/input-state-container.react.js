@@ -275,7 +275,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
         localID,
         mediaIDs,
       );
-      this.setState((prevState) => {
+      this.setState(prevState => {
         const prevUploads = prevState.pendingUploads[threadID];
         const newUploads = {};
         for (const localUploadID in prevUploads) {
@@ -371,7 +371,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
     const { setModal } = this.props;
 
     const appendResults = await Promise.all(
-      files.map((file) => this.appendFile(file, selectionTime)),
+      files.map(file => this.appendFile(file, selectionTime)),
     );
 
     if (appendResults.some(({ result }) => !result.success)) {
@@ -402,7 +402,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
 
     const newUploadsObject = _keyBy('localID')(newUploads);
     this.setState(
-      (prevState) => {
+      prevState => {
         const prevUploads = prevState.pendingUploads[threadID];
         const mergedUploads = prevUploads
           ? { ...prevUploads, ...newUploadsObject }
@@ -489,7 +489,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
     uploads: $ReadOnlyArray<PendingMultimediaUpload>,
   ) {
     return Promise.all(
-      uploads.map((upload) => this.uploadFile(threadID, upload)),
+      uploads.map(upload => this.uploadFile(threadID, upload)),
     );
   }
 
@@ -576,7 +576,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
       });
     }
 
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const uploads = prevState.pendingUploads[threadID];
       const currentUpload = uploads[localID];
       invariant(
@@ -623,7 +623,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
       });
     }
 
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const uploads = prevState.pendingUploads[threadID];
       const currentUpload = uploads[localID];
       invariant(
@@ -665,7 +665,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
     localUploadID: string,
     abort: () => void,
   ) {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const uploads = prevState.pendingUploads[threadID];
       const upload = uploads[localUploadID];
       if (!upload) {
@@ -689,7 +689,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
   }
 
   handleUploadFailure(threadID: string, localUploadID: string, e: any) {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const uploads = prevState.pendingUploads[threadID];
       const upload = uploads[localUploadID];
       if (!upload || !upload.abort || upload.serverID) {
@@ -739,7 +739,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
   cancelPendingUpload(threadID: string, localUploadID: string) {
     let revokeURL, abortRequest;
     this.setState(
-      (prevState) => {
+      prevState => {
         const currentPendingUploads = prevState.pendingUploads[threadID];
         if (!currentPendingUploads) {
           return {};
@@ -818,7 +818,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
   // if there are any
   createMultimediaMessage(threadID: string, localID: number) {
     const localMessageID = `local${localID}`;
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const currentPendingUploads = prevState.pendingUploads[threadID];
       if (!currentPendingUploads) {
         return {};
@@ -851,7 +851,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
   }
 
   setDraft(threadID: string, draft: string) {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       drafts: {
         ...prevState.drafts,
         [threadID]: draft,
@@ -864,7 +864,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
     localUploadID: string,
     progressPercent: number,
   ) {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const pendingUploads = prevState.pendingUploads[threadID];
       if (!pendingUploads) {
         return {};
@@ -895,7 +895,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
     if (!pendingUploads) {
       return false;
     }
-    return pendingUploads.some((upload) => upload.failed);
+    return pendingUploads.some(upload => upload.failed);
   }
 
   retryMultimediaMessage(
@@ -949,7 +949,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
       uploadsToRetry.push(pendingUpload);
     }
 
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const prevPendingUploads = prevState.pendingUploads[threadID];
       if (!prevPendingUploads) {
         return {};
@@ -985,9 +985,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
   }
 
   addReply = (message: string) => {
-    this.replyCallbacks.forEach((addReplyCallback) =>
-      addReplyCallback(message),
-    );
+    this.replyCallbacks.forEach(addReplyCallback => addReplyCallback(message));
   };
 
   addReplyListener = (callbackReply: (message: string) => void) => {
@@ -996,7 +994,7 @@ class InputStateContainer extends React.PureComponent<Props, State> {
 
   removeReplyListener = (callbackReply: (message: string) => void) => {
     this.replyCallbacks = this.replyCallbacks.filter(
-      (candidate) => candidate !== callbackReply,
+      candidate => candidate !== callbackReply,
     );
   };
 
@@ -1016,18 +1014,18 @@ class InputStateContainer extends React.PureComponent<Props, State> {
 export default React.memo<BaseProps>(function ConnectedInputStateContainer(
   props: BaseProps,
 ) {
-  const exifRotate = useSelector((state) => {
+  const exifRotate = useSelector(state => {
     const browser = detectBrowser(state.userAgent);
     return !browser || (browser.name !== 'safari' && browser.name !== 'chrome');
   });
   const activeChatThreadID = useSelector(
-    (state) => state.navInfo.activeChatThreadID,
+    state => state.navInfo.activeChatThreadID,
   );
   const viewerID = useSelector(
-    (state) => state.currentUserInfo && state.currentUserInfo.id,
+    state => state.currentUserInfo && state.currentUserInfo.id,
   );
   const messageStoreMessages = useSelector(
-    (state) => state.messageStore.messages,
+    state => state.messageStore.messages,
   );
   const callUploadMultimedia = useServerCall(uploadMultimedia);
   const callDeleteUpload = useServerCall(deleteUpload);

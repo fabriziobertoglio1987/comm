@@ -439,8 +439,8 @@ async function recalculateThreadPermissions(
   const relationshipChangeset = new RelationshipChangeset();
   const toUpdateDescendants = new Map();
   const existingMemberIDs = selectResult
-    .filter((row) => row.user && row.row_state === 'existing')
-    .map((row) => row.user.toString());
+    .filter(row => row.user && row.row_state === 'existing')
+    .map(row => row.user.toString());
   relationshipChangeset.setAllRelationshipsExist(existingMemberIDs);
 
   for (const row of selectResult) {

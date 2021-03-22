@@ -54,7 +54,7 @@ export default React.memo<BaseProps>(function ConnectedVerificationModal(
   props: BaseProps,
 ) {
   const serverVerificationResult = useSelector(
-    (state) => state.serverVerificationResult,
+    state => state.serverVerificationResult,
   );
 
   return (

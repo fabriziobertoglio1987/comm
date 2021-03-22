@@ -148,7 +148,7 @@ const header = (props: CoreStackHeaderProps) => {
   const castProps: StackHeaderProps = (props: any);
   return <ChatHeader {...castProps} />;
 };
-const headerBackButton = (props) => <HeaderBackButton {...props} />;
+const headerBackButton = props => <HeaderBackButton {...props} />;
 const screenOptions = {
   header,
   headerLeft: headerBackButton,

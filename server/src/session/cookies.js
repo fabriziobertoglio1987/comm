@@ -548,7 +548,7 @@ function addSessionChangeInfoToResult(
     sessionChange = ({
       cookieInvalidated: true,
       threadInfos,
-      userInfos: (values(userInfos).map((a) => a): UserInfo[]),
+      userInfos: (values(userInfos).map(a => a): UserInfo[]),
       currentUserInfo: {
         id: viewer.cookieID,
         anonymous: true,
@@ -558,7 +558,7 @@ function addSessionChangeInfoToResult(
     sessionChange = ({
       cookieInvalidated: false,
       threadInfos,
-      userInfos: (values(userInfos).map((a) => a): UserInfo[]),
+      userInfos: (values(userInfos).map(a => a): UserInfo[]),
     }: ServerSessionChange);
   }
   if (viewer.cookieSource === cookieSources.BODY) {

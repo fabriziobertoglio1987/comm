@@ -37,13 +37,12 @@ export default React.memo<Props>(function RelationshipPrompt({
   // We're fetching the info from state because we need the most recent
   // relationship status. Additionally, member info does not contain info
   // about relationship.
-  const otherUserInfo = useSelector((state) => {
+  const otherUserInfo = useSelector(state => {
     const currentUserID = state.currentUserInfo?.id;
     const otherUserID =
       threadInfo.members
-        .map((member) => member.id)
-        .find((id) => id !== currentUserID) ??
-      pendingPersonalThreadUserInfo?.id;
+        .map(member => member.id)
+        .find(id => id !== currentUserID) ?? pendingPersonalThreadUserInfo?.id;
 
     const { userInfos } = state.userStore;
     return otherUserID && userInfos[otherUserID]
