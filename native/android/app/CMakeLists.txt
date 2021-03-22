@@ -21,7 +21,7 @@ include_directories(
   ../../node_modules/react-native/ReactCommon/jsi
   ../../node_modules/react-native/ReactCommon/callinvoker
   ../../node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/jni/ReactCommon
-  ../../node_modules/react-native/ReactCommon/turbomodule/core
+  ../../node_modules/react-native/ReactCommon/react/nativemodule/core/ReactCommon
   ./src/cpp/
   ../../CommonCpp/NativeModules
 )
@@ -37,7 +37,7 @@ add_library(
   # Provides a relative path to your source file(s).
   ../../node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp
   ../../node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/jni/ReactCommon/CallInvokerHolder.cpp
-  ../../node_modules/react-native/ReactCommon/turbomodule/core/TurboModule.cpp
+  ../../node_modules/react-native/ReactCommon/react/nativemodule/core/ReactCommon/TurboModule.cpp
   ./src/cpp/jsiInstaller.cpp
   ${NATIVE_MODULES}
 )
