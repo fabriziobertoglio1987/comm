@@ -5,7 +5,8 @@ import { rawThreadInfoFromServerThreadInfo } from 'lib/shared/thread-utils';
 import { hasMinCodeVersion } from 'lib/shared/version-utils';
 import type { RawThreadInfo, ServerThreadInfo } from 'lib/types/thread-types';
 
-import { dbQuery, SQL, SQLStatement } from '../database/database';
+import { dbQuery, SQL } from '../database/database';
+import type { SQLStatementType } from '../database/types';
 import type { Viewer } from '../session/viewer';
 
 type FetchServerThreadInfosResult = {|
@@ -13,7 +14,7 @@ type FetchServerThreadInfosResult = {|
 |};
 
 async function fetchServerThreadInfos(
-  condition?: SQLStatement,
+  condition?: SQLStatementType,
 ): Promise<FetchServerThreadInfosResult> {
   const whereClause = condition ? SQL`WHERE `.append(condition) : '';
 
@@ -91,7 +92,7 @@ export type FetchThreadInfosResult = {|
 
 async function fetchThreadInfos(
   viewer: Viewer,
-  condition?: SQLStatement,
+  condition?: SQLStatementType,
 ): Promise<FetchThreadInfosResult> {
   const serverResult = await fetchServerThreadInfos(condition);
   return rawThreadInfosFromServerThreadInfos(viewer, serverResult);

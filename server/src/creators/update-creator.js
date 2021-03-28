@@ -37,9 +37,9 @@ import { promiseAll } from 'lib/utils/promises';
 import {
   dbQuery,
   SQL,
-  SQLStatement,
   mergeAndConditions,
 } from '../database/database';
+import type { SQLStatementType } from '../database/types';
 import { deleteUpdatesByConditions } from '../deleters/update-deleters';
 import {
   fetchEntryInfos,
@@ -273,7 +273,7 @@ async function createUpdates(
     insertRows.push(insertRow);
   }
 
-  const deleteSQLConditions: SQLStatement[] = [];
+  const deleteSQLConditions: SQLStatementType[] = [];
   for (const [conditionKey, keyUpdateDatas] of keyedUpdateDatas) {
     const deleteConditionByTarget: Map<?string, DeleteCondition> = new Map();
     for (const updateData of keyUpdateDatas) {

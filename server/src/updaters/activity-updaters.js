@@ -16,12 +16,8 @@ import { updateTypes } from 'lib/types/update-types';
 import { ServerError } from 'lib/utils/errors';
 
 import { createUpdates } from '../creators/update-creator';
-import {
-  dbQuery,
-  SQL,
-  mergeOrConditions,
-  SQLStatement,
-} from '../database/database';
+import { dbQuery, SQL, mergeOrConditions } from '../database/database';
+import type { SQLStatementType } from '../database/types';
 import { deleteActivityForViewerSession } from '../deleters/activity-deleters';
 import {
   checkThread,
@@ -43,14 +39,14 @@ type ThreadStatus =
       +threadID: string,
       +newLastReadMessage: number,
       +curLastReadMessage: number,
-      +rescindCondition: SQLStatement,
+      +rescindCondition: SQLStatementType,
     |}
   | {|
       +focusActive: false,
       +threadID: string,
       +newLastReadMessage: ?number,
       +curLastReadMessage: number,
-      +rescindCondition: ?SQLStatement,
+      +rescindCondition: ?SQLStatementType,
       +newerMessageFromOtherAuthor: boolean,
     |};
 async function activityUpdater(
@@ -444,7 +440,7 @@ async function setThreadUnreadStatus(
 
 async function rescindAndUpdateBadgeCounts(
   viewer: Viewer,
-  rescindCondition: ?SQLStatement,
+  rescindCondition: ?SQLStatementType,
   badgeCountUpdateSource: ?(
     | 'activity_update'
     | 'mark_as_unread'
