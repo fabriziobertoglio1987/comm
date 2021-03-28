@@ -545,8 +545,8 @@ const changeThreadSettingsLoadingStatusSelector = createLoadingStatusSelector(
   changeThreadSettingsActionTypes,
 );
 
-export default React.memo<BaseProps>(function ConnectedThreadSettingsModal(
-  props: BaseProps,
+const ConnectedThreadSettingsModal: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedThreadSettingsModal(
+  props
 ) {
   const changeInProgress = useSelector(
     state =>
@@ -586,3 +586,5 @@ export default React.memo<BaseProps>(function ConnectedThreadSettingsModal(
     />
   );
 });
+
+export default ConnectedThreadSettingsModal;

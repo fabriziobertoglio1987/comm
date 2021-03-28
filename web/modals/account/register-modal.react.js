@@ -300,8 +300,8 @@ class RegisterModal extends React.PureComponent<Props, State> {
 
 const loadingStatusSelector = createLoadingStatusSelector(registerActionTypes);
 
-export default React.memo<BaseProps>(function ConnectedRegisterModal(
-  props: BaseProps,
+const ConnectedRegisterModal: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedRegisterModal(
+  props
 ) {
   const inputDisabled = useSelector(loadingStatusSelector) === 'loading';
   const loginExtraInfo = useSelector(webLogInExtraInfoSelector);
@@ -318,3 +318,5 @@ export default React.memo<BaseProps>(function ConnectedRegisterModal(
     />
   );
 });
+
+export default ConnectedRegisterModal;

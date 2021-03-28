@@ -14,7 +14,7 @@ type Props = {|
   +setModal: (modal: ?React.Node) => void,
   +forceIncludeActiveThread: boolean,
 |};
-export default function ChatThreadBackground(props: Props) {
+export default function ChatThreadBackground(props: Props): React.Node {
   return (
     <ChatThreadList
       filterThreads={threadInBackgroundChatList}

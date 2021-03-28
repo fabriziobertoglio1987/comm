@@ -1,15 +1,15 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 
 import css from '../../style.css';
 import Modal from '../modal.react';
 
-type Props = {
+type Props = {|
   onClose: () => void,
-};
+|};
 
-export default function VerifyEmailModal(props: Props) {
+export default function VerifyEmailModal(props: Props): React.Node {
   return (
     <Modal name="Verify email" onClose={props.onClose}>
       <div className={css['modal-body']}>

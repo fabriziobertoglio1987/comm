@@ -280,8 +280,8 @@ class NewThreadModal extends React.PureComponent<Props, State> {
 
 const loadingStatusSelector = createLoadingStatusSelector(newThreadActionTypes);
 
-export default React.memo<BaseProps>(function ConnectedNewThreadModal(
-  props: BaseProps,
+const ConnectedNewThreadModal: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedNewThreadModal(
+  props
 ) {
   const { parentThreadID } = props;
   const parentThreadInfo: ?ThreadInfo = useSelector(state =>
@@ -302,3 +302,5 @@ export default React.memo<BaseProps>(function ConnectedNewThreadModal(
     />
   );
 });
+
+export default ConnectedNewThreadModal;

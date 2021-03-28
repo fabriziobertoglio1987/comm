@@ -164,8 +164,8 @@ const loadingStatusSelector = createLoadingStatusSelector(
   forgotPasswordActionTypes,
 );
 
-export default React.memo<BaseProps>(function ConnectedForgotPasswordModal(
-  props: BaseProps,
+const ConnectedForgotPasswordModal: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedForgotPasswordModal(
+  props
 ) {
   const inputDisabled = useSelector(loadingStatusSelector) === 'loading';
   const callForgotPassword = useServerCall(forgotPassword);
@@ -180,3 +180,5 @@ export default React.memo<BaseProps>(function ConnectedForgotPasswordModal(
     />
   );
 });
+
+export default ConnectedForgotPasswordModal;

@@ -1011,8 +1011,8 @@ class InputStateContainer extends React.PureComponent<Props, State> {
   }
 }
 
-export default React.memo<BaseProps>(function ConnectedInputStateContainer(
-  props: BaseProps,
+const ConnectedInputStateContainer: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedInputStateContainer(
+  props
 ) {
   const exifRotate = useSelector(state => {
     const browser = detectBrowser(state.userAgent);
@@ -1050,3 +1050,5 @@ export default React.memo<BaseProps>(function ConnectedInputStateContainer(
     />
   );
 });
+
+export default ConnectedInputStateContainer;

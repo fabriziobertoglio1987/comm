@@ -204,8 +204,8 @@ const loadingStatusSelector = createLoadingStatusSelector(
   resetPasswordActionTypes,
 );
 
-export default React.memo<BaseProps>(function ConnectedResetPasswordModal(
-  props: BaseProps,
+const ConnectedResetPasswordModal: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedResetPasswordModal(
+  props
 ) {
   const resetPasswordUsername = useSelector(
     state =>
@@ -235,3 +235,5 @@ export default React.memo<BaseProps>(function ConnectedResetPasswordModal(
     />
   );
 });
+
+export default ConnectedResetPasswordModal;

@@ -14,7 +14,7 @@ type Props = {|
   +emptyItem?: React.ComponentType<{||}>,
   +forceIncludeActiveThread: boolean,
 |};
-function ChatThreadList(props: Props) {
+function ChatThreadList(props: Props): React.Node {
   const {
     filterThreads,
     setModal,

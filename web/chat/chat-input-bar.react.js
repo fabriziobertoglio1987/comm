@@ -425,8 +425,8 @@ const joinThreadLoadingStatusSelector = createLoadingStatusSelector(
   joinThreadActionTypes,
 );
 
-export default React.memo<BaseProps>(function ConnectedChatInputBar(
-  props: BaseProps,
+const ConnectedChatInputBar: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedChatInputBar(
+  props
 ) {
   const viewerID = useSelector(
     state => state.currentUserInfo && state.currentUserInfo.id,
@@ -467,3 +467,5 @@ export default React.memo<BaseProps>(function ConnectedChatInputBar(
     />
   );
 });
+
+export default ConnectedChatInputBar;

@@ -50,8 +50,8 @@ function VerificationModal(props: Props) {
   );
 }
 
-export default React.memo<BaseProps>(function ConnectedVerificationModal(
-  props: BaseProps,
+const ConnectedVerificationModal: React.AbstractComponent<BaseProps, mixed> = React.memo<BaseProps>(function ConnectedVerificationModal(
+  props
 ) {
   const serverVerificationResult = useSelector(
     state => state.serverVerificationResult,
@@ -64,3 +64,5 @@ export default React.memo<BaseProps>(function ConnectedVerificationModal(
     />
   );
 });
+
+export default ConnectedVerificationModal;

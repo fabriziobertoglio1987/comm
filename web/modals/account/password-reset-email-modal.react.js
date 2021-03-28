@@ -1,15 +1,15 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 
 import css from '../../style.css';
 import Modal from '../modal.react';
 
-type Props = {
+type Props = {|
   onClose: () => void,
-};
+|};
 
-export default function PasswordResetEmailModal(props: Props) {
+export default function PasswordResetEmailModal(props: Props): React.Node {
   return (
     <Modal name="Password reset email sent" onClose={props.onClose}>
       <div className={css['modal-body']}>

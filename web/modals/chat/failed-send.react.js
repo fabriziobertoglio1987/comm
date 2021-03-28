@@ -9,7 +9,7 @@ type Props = {|
   +setModal: (modal: ?React.Node) => void,
 |};
 
-function FailedSendModal({ setModal }: Props) {
+function FailedSendModal({ setModal }: Props): React.Node {
   const clearModal = React.useCallback(() => setModal(null), [setModal]);
 
   return (
