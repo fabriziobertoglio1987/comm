@@ -3,6 +3,7 @@
 import apn from '@parse/node-apn';
 import fcmAdmin from 'firebase-admin';
 import invariant from 'invariant';
+import type { ProviderOptions, ResponseFailure } from '@parse/node-apn';
 
 import { threadSubscriptions } from 'lib/types/subscription-types';
 import { threadPermissions } from 'lib/types/thread-types';
@@ -15,8 +16,9 @@ async function getAPNProvider() {
     return cachedAPNProvider;
   }
   try {
-    // $FlowFixMe
-    const apnConfig = await import('../../secrets/apn_config');
+    const apnConfig: {|
+      +default: ProviderOptions,
+    |} = await import('../../secrets/apn_config');
     if (cachedAPNProvider === undefined) {
       cachedAPNProvider = new apn.Provider(apnConfig.default);
     }
@@ -67,10 +69,16 @@ const apnTokenInvalidationErrorCode = 410;
 const apnBadRequestErrorCode = 400;
 const apnBadTokenErrorString = 'BadDeviceToken';
 
+type APNPushResult =
+  | {| +success: true |}
+  | {|
+      +errors: $ReadOnlyArray<ResponseFailure>,
+      +invalidTokens?: $ReadOnlyArray<string>,
+    |};
 async function apnPush(
   notification: apn.Notification,
   deviceTokens: $ReadOnlyArray<string>,
-) {
+): Promise<APNPushResult> {
   const apnProvider = await getAPNProvider();
   if (!apnProvider && process.env.NODE_ENV === 'dev') {
     console.log('no server/secrets/apn_config.json so ignoring notifs');
@@ -99,11 +107,17 @@ async function apnPush(
   }
 }
 
+type FCMPushResult = {|
+  +success?: true,
+  +fcmIDs?: $ReadOnlyArray<string>,
+  +errors?: $ReadOnlyArray<Object>,
+  +invalidTokens?: $ReadOnlyArray<string>,
+|};
 async function fcmPush(
   notification: Object,
   deviceTokens: $ReadOnlyArray<string>,
   collapseKey: ?string,
-) {
+): Promise<FCMPushResult> {
   const initialized = await initializeFCMApp();
   if (!initialized && process.env.NODE_ENV === 'dev') {
     console.log('no server/secrets/fcm_config.json so ignoring notifs');
@@ -155,7 +169,7 @@ async function fcmPush(
   if (invalidTokens.length > 0) {
     result.invalidTokens = invalidTokens;
   }
-  return result;
+  return { ...result };
 }
 
 async function fcmSinglePush(
