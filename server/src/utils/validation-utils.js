@@ -1,29 +1,37 @@
 // @flow
 
 import t from 'tcomb';
+import type {
+  TStructProps,
+  TIrreducible,
+  TRefinement,
+  TEnums,
+  TInterface,
+} from 'tcomb';
 
 import { ServerError } from 'lib/utils/errors';
 
 import { verifyClientSupported } from '../session/version';
 import type { Viewer } from '../session/viewer';
 
-function tBool(value: boolean) {
+function tBool(value: boolean): TIrreducible<boolean> {
   return t.irreducible('literal bool', x => x === value);
 }
 
-function tString(value: string) {
+function tString(value: string): TIrreducible<string> {
   return t.irreducible('literal string', x => x === value);
 }
 
-function tShape(spec: { [key: string]: * }) {
+function tShape(spec: TStructProps): TInterface {
   return t.interface(spec, { strict: true });
 }
 
-function tRegex(regex: RegExp) {
+type TRegex = TRefinement<string>;
+function tRegex(regex: RegExp): TRegex {
   return t.refinement(t.String, val => regex.test(val));
 }
 
-function tNumEnum(nums: $ReadOnlyArray<number>) {
+function tNumEnum(nums: $ReadOnlyArray<number>): TRefinement<number> {
   return t.refinement(t.Number, (input: number) => {
     for (const num of nums) {
       if (input === num) {
@@ -34,17 +42,20 @@ function tNumEnum(nums: $ReadOnlyArray<number>) {
   });
 }
 
-const tDate = tRegex(/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/);
-const tColor = tRegex(/^[a-fA-F0-9]{6}$/); // we don't include # char
-const tPlatform = t.enums.of(['ios', 'android', 'web']);
-const tDeviceType = t.enums.of(['ios', 'android']);
-const tPlatformDetails = tShape({
+const tDate: TRegex = tRegex(/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/);
+const tColor: TRegex = tRegex(/^[a-fA-F0-9]{6}$/); // we don't include # char
+const tPlatform: TEnums = t.enums.of(['ios', 'android', 'web']);
+const tDeviceType: TEnums = t.enums.of(['ios', 'android']);
+const tPlatformDetails: TInterface = tShape({
   platform: tPlatform,
   codeVersion: t.maybe(t.Number),
   stateVersion: t.maybe(t.Number),
 });
-const tPassword = t.refinement(t.String, (password: string) => password);
-const tCookie = tRegex(/^(user|anonymous)=[0-9]+:[0-9a-f]+$/);
+const tPassword: TRefinement<string> = t.refinement(
+  t.String,
+  (password: string) => !!password,
+);
+const tCookie: TRegex = tRegex(/^(user|anonymous)=[0-9]+:[0-9a-f]+$/);
 
 async function validateInput(viewer: Viewer, inputValidator: *, input: *) {
   if (!viewer.isSocket) {
