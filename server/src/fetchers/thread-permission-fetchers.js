@@ -149,7 +149,7 @@ async function checkIfThreadIsBlocked(
   viewer: Viewer,
   threadID: string,
   permission: ThreadPermission,
-) {
+): Promise<boolean> {
   const disabledThreadIDs = await checkThreadsFrozen(
     viewer,
     [permission],

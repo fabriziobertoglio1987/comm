@@ -9,6 +9,7 @@ import {
   type CookieSource,
   type SessionIdentifierType,
   cookieTypes,
+  type CookieType,
   sessionIdentifierTypes,
 } from 'lib/types/session-types';
 import { ServerError } from 'lib/utils/errors';
@@ -59,8 +60,8 @@ export type ViewerData = UserViewerData | AnonymousViewerData;
 
 class Viewer {
   data: ViewerData;
-  sessionChanged = false;
-  cookieInvalidated = false;
+  sessionChanged: boolean = false;
+  cookieInvalidated: boolean = false;
   initialCookieName: string;
   cachedTimeZone: ?string;
 
@@ -69,11 +70,11 @@ class Viewer {
     this.initialCookieName = Viewer.cookieNameFromViewerData(data);
   }
 
-  static cookieNameFromViewerData(data: ViewerData) {
+  static cookieNameFromViewerData(data: ViewerData): CookieType {
     return data.loggedIn ? cookieTypes.USER : cookieTypes.ANONYMOUS;
   }
 
-  getData() {
+  getData(): ViewerData {
     return this.data;
   }
 

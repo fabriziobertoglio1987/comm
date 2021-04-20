@@ -42,7 +42,7 @@ import type { UpdatesForCurrentSession } from './update-creator';
 
 const { squadbot } = bots;
 
-const privateThreadDescription =
+const privateThreadDescription: string =
   'This is your private thread, ' +
   'where you can set reminders and jot notes in private!';
 
