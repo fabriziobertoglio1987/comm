@@ -92,7 +92,8 @@ declare type express$CookieOptions = {
   maxAge?: number,
   path?: string,
   secure?: boolean,
-  signed?: boolean
+  signed?: boolean,
+  sameSite?: boolean | string,
 };
 
 declare type express$Path = string | RegExp;
